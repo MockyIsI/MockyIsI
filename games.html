@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .lights {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        height: 100vh;
+      }
+      .light {
+        width: 100px;
+        height: 100px;
+        background-color: gray;
+        border-radius: 50%;
+        margin: 10px;
+      }
+      .light.on {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="score">0</h1>
+    <div class="lights">
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+    </div>
+  </body>
+  <script>
+    const lights = document.querySelectorAll('.light');
+    const scoreDisplay = document.querySelector('#score');
+    let score = 0;
+
+    function turnOffLight(light) {
+      light.classList.remove('on');
+    }
+
+    lights.forEach(light => {
+      light.addEventListener('click', () => {
+        if (light.classList.contains('on')) {
+          score++;
+          scoreDisplay.textContent = score;
+          turnOffLight(light);
+        }
+      });
+    });
+
+    function turnOnLight() {
+      const lightIndex = Math.floor(Math.random() * lights.length);
+      lights[lightIndex].classList.add('on');
+      setTimeout(() => {
+        turnOffLight(lights[lightIndex]);
+      }, 1000);
+    }
+
+    setInterval(turnOnLight, 500);
+  </script>
+</html>
